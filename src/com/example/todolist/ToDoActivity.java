@@ -3,14 +3,18 @@ package com.example.todolist;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 
 import org.apache.commons.io.FileUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,16 +54,55 @@ private EditText etNewItem;
 			}
     		
 		});
+    	lvItems.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapater, View item, int pos,
+					long id) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
+				i.putExtra("EditItem", todoItems.get(pos));
+				startActivityForResult(i, 0);
+				todoItems.remove(pos);	
+				todoAdapter.notifyDataSetChanged();
+				writeItems();
+			}
+    		
+		});
+    	
+    	/*
+    	 * lvItems.setOnClickListener(new OnClickListener() {
+    	 
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
+				i.putExtra("Item", todoItems.get(pos));
+				
+			}
+		});
+		*/
 		
 	}
 
-	private void populateArrayItems(){
+	/*private void populateArrayItems(){
     	todoItems = new ArrayList<String>();
     	todoItems.add("Items 1");
     	todoItems.add("Items 2");
     	todoItems.add("Items 3");
-    }
+    }*/
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if (resultCode == RESULT_OK && requestCode == 0) {
+    		String edited_txt = data.getExtras().getString("editedText");
+    		todoItems.add(edited_txt);
+    		etNewItem.setText("");
+    		todoAdapter.notifyDataSetChanged();
+    		writeItems();
+    	}
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

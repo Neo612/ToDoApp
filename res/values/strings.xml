@@ -8,5 +8,13 @@
     <string name="Add_label">Add</string>
     <string name="Add_Button_label">Add</string>
     <string name="Add_button_label">Add</string>
+    <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="Edit_hint">Edit_hint</string>
+    <string name="Save_hint">Save_hint</string>
+    <string name="Savehint">Save</string>
+    <string name="Edit_text"></string>
+    <string name="Edit_txt">Edit Text Here</string>
+    <string name="Edit">Edit</string>
+    <string name="EdtItm"></string>
 
 </resources>
