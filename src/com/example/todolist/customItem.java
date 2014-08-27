@@ -19,5 +19,10 @@ public class customItem {
 		
 		return customItems;
 	}
+	
+	@Override
+    public String toString() {
+        return "TodoItem [item=" + todoitem_txt + ", Date=" + due_date + "]";
+    }
 
 }

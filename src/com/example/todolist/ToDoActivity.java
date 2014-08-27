@@ -38,54 +38,39 @@ private ListView lvItems;
 private EditText etNewItem;
 private ArrayList<customItem> arrayofItems;
 private todoExtendedAdapter custom_adapter;
+private ToDoSQLiteHelper sqlite_db;
 private static final int TWO = 2;
 private static final int THREE = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_to_do);
-        //lvItems = (ListView) findViewById(R.id.lvItems);
-        //populateArrayItems();
-        //lvItems.setAdapter(todoAdapter);
-        
-        
+        super.onCreate(savedInstanceState);        
      
         setContentView(R.layout.activity_to_do);
         etNewItem = (EditText) findViewById(R.id.etNewItem);
         lvItems = (ListView) findViewById(R.id.lvItems);
         
-		arrayofItems = customItem.getcustomItem();//Put read function here
+        sqlite_db = new ToDoSQLiteHelper (this);
+        
+        //db.deleteAll();
+        
+        //db.addItem(new customItem("QQQQ", "12/12/12"));
+
+        // get all books
+        arrayofItems = sqlite_db.getAllItems();
+ 
+        // delete one book
+        //db.deleteBook(list.get(0));
+ 
+        // get all books
+       // db.getAllBooks();
+        
+		//arrayofItems = customItem.getcustomItem();//Put read function here
         //readItems();
 		custom_adapter = new todoExtendedAdapter(this, arrayofItems);
 		lvItems.setAdapter(custom_adapter);
 		setupListViewListener();
         
         //populateArrayItems();
-       
-        
-        //todoAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, todoItems);
-        //todoExtAdptr = new todoExtendedAdapter(this, (String[]) todoItems.toArray());
-        //lvItems.setAdapter(todoAdapter);
-                
-        
-       /* ArrayAdapter<String[]> adapter = new ArrayAdapter<String[]>(this, android.R.layout.simple_list_item_2, 
-        		android.R.id.text1, itemList){
-        	@Override
-        	public View getView(int position, View convertView, ViewGroup parent){
-        		View view = super.getView(position, convertView, parent);
-        		String[] entry = itemList.get(position);
-        		TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-        		TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-        		text1.setText(entry[0]);
-        		text2.setText(entry[1]);
- 
-        		return view;
-        		
-        	}
-        
-        };
-        lvItems.setAdapter(adapter); 
-        */
         
     }
 
@@ -97,7 +82,8 @@ private static final int THREE = 3;
 			public boolean onItemLongClick(AdapterView<?> adapater, View item,
 					int pos, long id) {
 				// TODO Auto-generated method stub
-				arrayofItems.remove(pos);
+				customItem del_itm = arrayofItems.remove(pos);
+				sqlite_db.deleteItem(del_itm);
 				custom_adapter.notifyDataSetChanged();
 				writeItems();
 				return true;
@@ -114,7 +100,8 @@ private static final int THREE = 3;
 				i.putExtra("EditItem", arrayofItems.get(pos).todoitem_txt);
 				i.putExtra("EditDate", arrayofItems.get(pos).due_date);
 				startActivityForResult(i, TWO);
-				arrayofItems.remove(pos);	
+				customItem del_itm = arrayofItems.remove(pos);
+				//sqlite_db.deleteItem(del_itm);
 				custom_adapter.notifyDataSetChanged();
 				writeItems();
 			}
@@ -141,7 +128,9 @@ private static final int THREE = 3;
     	if (resultCode == RESULT_OK && requestCode == TWO) {
     		String edited_txt = data.getExtras().getString("editedText");
     		String edited_date = data.getExtras().getString("editedDate");
-    		arrayofItems.add(new customItem(edited_txt, edited_date));
+    		customItem tmp_itm = new customItem(edited_txt, edited_date);
+    		arrayofItems.add(tmp_itm);
+    		sqlite_db.updateItem(tmp_itm);
     		custom_adapter.notifyDataSetChanged();
     		etNewItem.setText("");
     		//todoAdapter.notifyDataSetChanged();
@@ -150,7 +139,10 @@ private static final int THREE = 3;
     		//String itemText = etNewItem.getText().toString();
     		String itemText = data.getExtras().getString("addedText");
     		String itemDate = data.getExtras().getString("addedDate");
-    		arrayofItems.add(new customItem(itemText, itemDate));
+    		customItem tmp_itm = new customItem(itemText, itemDate);
+    		arrayofItems.add(tmp_itm);
+    		sqlite_db.addItem(tmp_itm);
+    		//arrayofItems.add(new customItem(itemText, itemDate));
     		custom_adapter.notifyDataSetChanged();
         	etNewItem.setText("");
         	writeItems();	
@@ -174,52 +166,19 @@ private static final int THREE = 3;
     }
 
    private void readItems() {
-    	File filesDir = getFilesDir();
-    	File todoFile = new File(filesDir, "todo.txt");
-    	arrayofItems = new ArrayList<customItem>();
-    	try {
-    		InputStream instream = openFileInput("todo.txt");
-    		if(instream != null){
-    			InputStreamReader inputreader = new InputStreamReader(instream);
-    		    BufferedReader buffreader = new BufferedReader(inputreader);
-    		    String prev_line = null;
-    		    String curr_line;
-    		    
-    		    int count = 1;
-    		    while (( curr_line = buffreader.readLine()) != null) {
-    		    	if(count == 2){
-    		    	arrayofItems.add(new customItem(prev_line,curr_line));
-    		    	count = 1;
-    		    	prev_line = null; 
-    		    	}else {
-    		    		prev_line = curr_line;
-    		    		count = 2;
-    		    	}
-    		    
-    		    }
-    		}
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
     	
-    	/*try {
-    		//arrayofItems = new ArrayList<customItem>(FileUtils.readLines(todoFile));
-    		arrayofItems = new ArrayList<customItem>();
-    		FileUtils.readLines(
-    	} catch (IOException e){
-    		arrayofItems = new ArrayList<customItem>();
-    	}*/
     	
     }
     
     private void writeItems() {
-       	File filesDir = getFilesDir();
+       
+    	/*	File filesDir = getFilesDir();
     	File todoFile = new File(filesDir, "todo.txt");
     	try {
     		FileUtils.writeLines(todoFile, arrayofItems);
     	} catch (IOException e){
     		e.printStackTrace();
-    	}
+    	}*/
     }
     //@Override
     //public boolean onOptionsItemSelected(MenuItem item) {
