@@ -1,7 +1,15 @@
 ToDoApp
 =======
 
-Added Support for SQLIte. Used SQLite DB instead of local file system.
+3)Used Dialog fragments to edit the todo items. Changed the background. Changed the styles. 
+
+Hours spent: 4 hours
+
+Time was spent on trying out and understanding dialog fragments, building fragments, building alert boxes, exchanging data through dialog fragments. And also understanding styling and background.
+
+---------------------------------------------------
+
+2)Added Support for SQLIte. Used SQLite DB instead of local file system.
 
 Hours spent: 3 hours
 
@@ -11,7 +19,7 @@ Support for SQLIte and Using it internally.
 Time spend in understanding how to use SQLite in Android.
 
 ========================================
-Extended the app to add the Due Dates and Edit the due dates as well saving them to a file.
+1)Extended the app to add the Due Dates and Edit the due dates as well saving them to a file.
 
 Hours spent: 6 hours
 
