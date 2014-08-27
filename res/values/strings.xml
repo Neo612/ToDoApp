@@ -16,5 +16,14 @@
     <string name="Edit_txt">Edit Text Here</string>
     <string name="Edit">Edit</string>
     <string name="EdtItm"></string>
+    <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="Add">Add</string>
+    <string name="Due_Date">Due Date</string>
+    <string name="Add_New_item">Add_New_item</string>
+    <string name="Add_New_Itm">Add New Item</string>
+    <string name="Due_Date1">Due Date(MM/DD/YY)</string>
+    <string name="title_activity_test_main_activity">Test_main_activity</string>
+    <string name="Large_text">To Do Item</string>
+    <string name="DueDate_2">Due Date</string>
 
 </resources>

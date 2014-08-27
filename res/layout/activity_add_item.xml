@@ -6,40 +6,43 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.todolist.EditItemActivity" >
+    tools:context="com.example.todolist.AddItemActivity" >
 
     <EditText
-        android:id="@+id/edtItemtext"
+        android:id="@+id/AddTxt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="@string/EdtItm" >
+        android:hint="@string/Add_hint" >
 
         <requestFocus />
     </EditText>
-    
-        <EditText
-        android:id="@+id/AddDate_edit"
+
+    <EditText
+        android:id="@+id/AddDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edtItemtext"
-        android:layout_below="@+id/edtItemtext"
+        android:layout_alignLeft="@+id/AddTxt1"
+        android:layout_below="@+id/AddTxt1"
         android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="@string/Due_Date1"
         android:inputType="date" />
 
-        <Button
-            android:id="@+id/saveTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/AddDate_edit"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:hint="@string/Savehint"
-            android:onClick="onSaveItem" />
+    <Button
+        android:id="@+id/AddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onAddedItemActivity"
+        android:layout_alignLeft="@+id/AddDate"
+        android:layout_below="@+id/AddDate"
+        android:layout_marginLeft="63dp"
+        android:layout_marginTop="24dp"
+        android:hint="@string/Add"
+        android:text="@string/Add" />
 
 </RelativeLayout>

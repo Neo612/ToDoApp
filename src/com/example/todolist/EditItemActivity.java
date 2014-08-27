@@ -12,16 +12,21 @@ import android.widget.EditText;
 public class EditItemActivity extends ActionBarActivity {
 
 	private String itm;
+	private String date;
 	//private Adapter edt_adapter;
 	private EditText edt_itm; 
+	private EditText edt_date; 
 	private View edItemView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_item);
 		itm = getIntent().getStringExtra("EditItem");
+		date = getIntent().getStringExtra("EditDate");
 		edt_itm = (EditText) findViewById(R.id.edtItemtext);
+		edt_date = (EditText) findViewById(R.id.AddDate_edit);
 		edt_itm.setText(itm);
+		edt_date.setText(date);
 		edt_itm.setSelection(edt_itm.getText().length());
 		//finish();		
 	}
@@ -35,8 +40,10 @@ public class EditItemActivity extends ActionBarActivity {
 
 	public void onSaveItem(View v) {
 		EditText etText = (EditText) findViewById(R.id.edtItemtext);
+		EditText etdate = (EditText) findViewById(R.id.AddDate_edit);
 		Intent data = new Intent();
 		data.putExtra("editedText", etText.getText().toString());
+		data.putExtra("editedDate", etdate.getText().toString());
 		setResult(RESULT_OK, data);
 		finish();
 	}
