@@ -4,3 +4,10 @@ Extended the app to add the Due Dates and Edit the due dates as well saving them
 
 Hours spent: 6 hours
 
+Completed:
+Adding Due while creating the todo Items
+Edit Due Dates by clicking the todo item.
+Save these to a file.
+
+Time spend in figuring out how to use custom adapter.
+
