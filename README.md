@@ -1,5 +1,16 @@
 ToDoApp
 =======
+
+Added Support for SQLIte. Used SQLite DB instead of local file system.
+
+Hours spent: 3 hours
+
+Completed:
+Support for SQLIte and Using it internally.
+
+Time spend in understanding how to use SQLite in Android.
+
+========================================
 Extended the app to add the Due Dates and Edit the due dates as well saving them to a file.
 
 Hours spent: 6 hours
