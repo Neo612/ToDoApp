@@ -14,8 +14,11 @@ import java.io.BufferedReader;
 
 import org.apache.commons.io.FileUtils;
 
+import com.example.todolist.Frag_Edit_item.Frag_Edit_itemListener;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
@@ -27,10 +30,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.ViewGroup;
 
 
-public class ToDoActivity extends ActionBarActivity {
+public class ToDoActivity extends ActionBarActivity implements Frag_Edit_itemListener{
 //private ArrayList<String> todoItems;
 //private ArrayAdapter<String> todoAdapter;
 //private todoExtendedAdapter todoExtAdptr;
@@ -43,7 +47,8 @@ private static final int TWO = 2;
 private static final int THREE = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);        
+        super.onCreate(savedInstanceState);   
+        
      
         setContentView(R.layout.activity_to_do);
         etNewItem = (EditText) findViewById(R.id.etNewItem);
@@ -69,10 +74,44 @@ private static final int THREE = 3;
 		custom_adapter = new todoExtendedAdapter(this, arrayofItems);
 		lvItems.setAdapter(custom_adapter);
 		setupListViewListener();
-        
+		//custom_adapter.notifyDataSetChanged();
         //populateArrayItems();
         
     }
+
+	private void showEditDialog(String item, String date) {
+		// TODO Auto-generated method stub
+		  FragmentManager fm = getSupportFragmentManager();
+		  Frag_Edit_item editNameDialog = Frag_Edit_item.newInstance(item, date);
+	      editNameDialog.show(fm, "fragment_edit_item");
+		
+	}
+	
+	@Override
+	public void onFinishEditDialog(String inputText, String date) {
+		// TODO Auto-generated method stub
+		
+		
+		customItem tmp_itm = new customItem(inputText, date);
+		arrayofItems.add(tmp_itm);
+		int i = sqlite_db.updateItem(tmp_itm);
+		if(i==0) {
+			sqlite_db.deleteItem(tmp_itm);
+			sqlite_db.addItem(tmp_itm);
+			Toast.makeText(this, "Item: " + inputText +", Due Date: "+date + "Added.", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "Item: " + inputText +", Due Date: "+date + "Updated.", Toast.LENGTH_SHORT).show();
+		}
+		custom_adapter.notifyDataSetChanged();
+		etNewItem.setText("");
+		}
+	
+	/*private void showAlertDialog() {
+	  	
+		FragmentManager fm = getSupportFragmentManager();
+	  	Frag_Edit_item alertDialog = Frag_Edit_item.newInstance("XXXXX", "02/01/01");
+	  	alertDialog.show(fm, "fragment_edit_item");
+	  }*/
 
 	private void setupListViewListener() {
 		// TODO Auto-generated method stub
@@ -82,6 +121,7 @@ private static final int THREE = 3;
 			public boolean onItemLongClick(AdapterView<?> adapater, View item,
 					int pos, long id) {
 				// TODO Auto-generated method stub
+				//showAlertDialog();
 				customItem del_itm = arrayofItems.remove(pos);
 				sqlite_db.deleteItem(del_itm);
 				custom_adapter.notifyDataSetChanged();
@@ -96,6 +136,12 @@ private static final int THREE = 3;
 			public void onItemClick(AdapterView<?> adapater, View item, int pos,
 					long id) {
 				// TODO Auto-generated method stub
+				showEditDialog(arrayofItems.get(pos).todoitem_txt.toString(),
+						arrayofItems.get(pos).due_date.toString());
+				arrayofItems.remove(pos);
+				//sqlite_db.deleteItem(arrayofItems.get(index));
+				
+				/*
 				Intent i = new Intent(ToDoActivity.this, EditItemActivity.class);
 				i.putExtra("EditItem", arrayofItems.get(pos).todoitem_txt);
 				i.putExtra("EditDate", arrayofItems.get(pos).due_date);
@@ -104,6 +150,7 @@ private static final int THREE = 3;
 				//sqlite_db.deleteItem(del_itm);
 				custom_adapter.notifyDataSetChanged();
 				writeItems();
+				*/
 			}
     		
 		});
@@ -115,7 +162,7 @@ private static final int THREE = 3;
 		todoExtendedAdapter custom_adapter = new todoExtendedAdapter(this, arrayofItems);
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(custom_adapter);
-		
+	
 		
     	todoItems = new ArrayList<String>();
     	todoItems.add("Items 1");
@@ -191,6 +238,8 @@ private static final int THREE = 3;
         //}
         //return super.onOptionsItemSelected(item);
     //}
+
+	
       
     
 }
