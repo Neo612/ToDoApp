@@ -1,5 +1,18 @@
 ToDoApp
 =======
+==============================================================================================
+Extensions Added:
+  Add support for completion due dates for items
+  Add support for priority for items
+  Change the item in ListView to display additional attributes, stylize the items
+  Persist the todo app in SQLite instead of using a text file
+  Use a DialogFragment instead of new Activity to support editing items
+  
+Pending:
+  Tweak the style of the app, improve UI, play with adding images or backgrounds
+  
+===================================================================================
+
 4) Added the Ability to prioritize the tasks. Based on the priority the color of the font on the tasks would to Red: High, Yellow: Medium, Blue: Low.
 
 Hours Spent: 3 hours
