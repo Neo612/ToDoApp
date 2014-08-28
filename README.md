@@ -13,7 +13,7 @@ Pending:
   
 ===================================================================================
 
-5) Added the Ability to prioritize the tasks. Based on the priority the color of the font on the tasks would to Red: High, Yellow: Medium, Blue: Low.
+5. Added the Ability to prioritize the tasks. Based on the priority the color of the font on the tasks would to Red: High, Yellow: Medium, Blue: Low.
 
 Hours Spent: 3 hours
 
@@ -21,7 +21,7 @@ I have spent time on adding Adding entried to SQLite DB for saving the priority.
 
 ----------------------------------------------------------------------------------------
 
-4)Used Dialog fragments to edit the todo items. Changed the background. Changed the styles. 
+4.  Used Dialog fragments to edit the todo items. Changed the background. Changed the styles. 
 
 Hours spent: 4 hours
 
@@ -29,7 +29,7 @@ Time was spent on trying out and understanding dialog fragments, building fragme
 
 ---------------------------------------------------
 
-3)Added Support for SQLIte. Used SQLite DB instead of local file system.
+3.  Added Support for SQLIte. Used SQLite DB instead of local file system.
 
 Hours spent: 3 hours
 
