@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class todoExtendedAdapter extends ArrayAdapter<customItem>{
 
@@ -30,6 +31,21 @@ public class todoExtendedAdapter extends ArrayAdapter<customItem>{
 		//tvtodoTxt.setText(customItem.todoitem_txt);
 		tvtodoTxt.setText(item.todoitem_txt);
 		tvDate.setText(item.due_date);
+
+		if(item.priority.equalsIgnoreCase("High")){
+			tvtodoTxt.setTextColor(android.graphics.Color.RED);
+			tvDate.setTextColor(android.graphics.Color.RED);
+		}else if(item.priority.equalsIgnoreCase("Medium")){
+			tvtodoTxt.setTextColor(android.graphics.Color.YELLOW);
+			tvDate.setTextColor(android.graphics.Color.YELLOW);
+		}else{
+			Toast.makeText(this.getContext(), "Here adapter priority  = " + item.priority.toString(),
+					Toast.LENGTH_SHORT).show(); 
+			tvtodoTxt.setTextColor(android.graphics.Color.BLUE);
+			tvDate.setTextColor(android.graphics.Color.BLUE);
+		}
+		
+		
 		return convertView;
 	}
 }

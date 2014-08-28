@@ -35,16 +35,24 @@
         android:hint="@string/Due_Date1"
         android:inputType="date" />
 
+    <Spinner
+        android:id="@+id/spinner_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/LargeRedFont"
+        android:layout_alignLeft="@+id/AddDate"
+        android:layout_below="@+id/AddDate" />
+
     <Button
         android:id="@+id/AddBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onAddedItemActivity"
-        android:layout_alignLeft="@+id/AddDate"
-        android:layout_below="@+id/AddDate"
-        android:layout_marginLeft="63dp"
-        android:layout_marginTop="24dp"
+        android:layout_alignLeft="@+id/spinner_1"
+        android:layout_below="@+id/spinner_1"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="18dp"
         android:hint="@string/Add"
+        android:onClick="onAddedItemActivity"
         android:text="@string/Add" />
 
 </RelativeLayout>

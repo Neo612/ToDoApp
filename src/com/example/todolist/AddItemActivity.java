@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AddItemActivity extends ActionBarActivity {
 	private String add_itm_txt;
@@ -21,14 +24,28 @@ public class AddItemActivity extends ActionBarActivity {
 		edt_itm = (EditText) findViewById(R.id.AddTxt1);
 		edt_itm.setText(add_itm_txt);
 		edt_itm.setSelection(edt_itm.getText().length());
+		Spinner spinner = (Spinner) findViewById(R.id.spinner_1);
+		
+		// Create an ArrayAdapter using the string array and a default spinner layout
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.priority_array, android.R.layout.simple_spinner_item);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(new SpinnerActivity());
 		
 	}
 	public void onAddedItemActivity(View v) {
 		EditText etText = (EditText) findViewById(R.id.AddTxt1);
 		EditText etDate = (EditText) findViewById(R.id.AddDate);
+		Spinner spinner = (Spinner) findViewById(R.id.spinner_1);
 		Intent data = new Intent();
 		data.putExtra("addedText", etText.getText().toString());
 		data.putExtra("addedDate", etDate.getText().toString());
+		data.putExtra("addedPriority", String.valueOf(spinner.getSelectedItem()));
+		Toast.makeText(this, "addedPriority = " + String.valueOf(spinner.getSelectedItem()), 
+				Toast.LENGTH_SHORT).show();
 		setResult(RESULT_OK, data);
 		finish();		
 	}

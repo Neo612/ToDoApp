@@ -32,13 +32,19 @@
         android:hint="@string/Due_Date1"
         android:inputType="date" />
 
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/AddDate_edit"
+            android:layout_below="@+id/AddDate_edit" />
+
         <Button
             android:id="@+id/saveTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/AddDate_edit"
+            android:layout_below="@+id/spinner1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:hint="@string/Savehint"
             android:onClick="onSaveItem" />
 

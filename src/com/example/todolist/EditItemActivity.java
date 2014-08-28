@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class EditItemActivity extends ActionBarActivity {
 
@@ -28,6 +30,17 @@ public class EditItemActivity extends ActionBarActivity {
 		edt_itm.setText(itm);
 		edt_date.setText(date);
 		edt_itm.setSelection(edt_itm.getText().length());
+		
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		
+		// Create an ArrayAdapter using the string array and a default spinner layout
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.priority_array, android.R.layout.simple_spinner_item);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(new SpinnerActivity());
 		//finish();		
 	}
 
@@ -41,9 +54,11 @@ public class EditItemActivity extends ActionBarActivity {
 	public void onSaveItem(View v) {
 		EditText etText = (EditText) findViewById(R.id.edtItemtext);
 		EditText etdate = (EditText) findViewById(R.id.AddDate_edit);
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		Intent data = new Intent();
 		data.putExtra("editedText", etText.getText().toString());
 		data.putExtra("editedDate", etdate.getText().toString());
+		data.putExtra("editedPriority", String.valueOf(spinner.getSelectedItem()));
 		setResult(RESULT_OK, data);
 		finish();
 	}

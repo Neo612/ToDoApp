@@ -6,23 +6,25 @@ import java.util.Date;
 public class customItem {
 	public String todoitem_txt;
 	public String due_date;
+	public String priority;
 	
-	public customItem(String itemTxt, String date) {
+	public customItem(String itemTxt, String date, String priority) {
 		this.todoitem_txt = itemTxt;
 		this.due_date = date;
+		this.priority = priority;
 	}
 	
 	public static ArrayList<customItem> getcustomItem(){
 		ArrayList<customItem> customItems = new ArrayList<customItem>();
-		customItems.add(new customItem("aaaaaa","23/01/2014" ) );
-		customItems.add(new customItem("bbbbbb","24/12/2014" ) );
-		
+		//customItems.add(new customItem("aaaaaa","23/01/2014" ) );
+		//customItems.add(new customItem("bbbbbb","24/12/2014" ) );
+	
 		return customItems;
 	}
 	
 	@Override
     public String toString() {
-        return "TodoItem [item=" + todoitem_txt + ", Date=" + due_date + "]";
+        return "TodoItem [item=" + todoitem_txt + ", Date=" + due_date + "priority = "+priority+"]";
     }
 
 }

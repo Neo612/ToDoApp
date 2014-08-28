@@ -14,7 +14,7 @@ import android.util.Log;
 public class ToDoSQLiteHelper extends SQLiteOpenHelper {
 	
 	// Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     // Database Name
     private static final String DATABASE_NAME = "ToDoItemsDB";
  
@@ -26,7 +26,7 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// Creates todoDbList table
 		String CREATE_TO_DO_TABLE = "CREATE TABLE todoDbList ( " + 
-					"item TEXT, date TEXT )";
+					"item TEXT, date TEXT, priority TEXT )";
 		db.execSQL(CREATE_TO_DO_TABLE);
 	}
 
@@ -48,8 +48,9 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
     // Books Table Columns names
     private static final String KEY_ITEM = "item";
     private static final String KEY_DATE = "date";
+    private static final String KEY_PRIORITY = "priority";
  
-    private static final String[] COLUMNS = {KEY_ITEM,KEY_DATE};
+    private static final String[] COLUMNS = {KEY_ITEM,KEY_DATE,KEY_PRIORITY};
  
 	public void addItem(customItem item){
         //for logging
@@ -62,6 +63,7 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_ITEM, item.todoitem_txt.toString()); // get title 
 		values.put(KEY_DATE, item.due_date.toString()); // get author
+		values.put(KEY_PRIORITY, item.priority.toString()); 
 
 		// 3. insert
 		db.insert(TABLE_TODO_DB_LIST, // table
@@ -93,7 +95,8 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
 	        cursor.moveToFirst();
 	 
 	    // 4. build book object
-	    customItem item = new customItem(cursor.getString(0), cursor.getString(1));
+	    customItem item = new customItem(cursor.getString(0), 
+	    		cursor.getString(1), cursor.getString(2));
 	 
 	    //log 
 	    Log.d("getItem()", input_item.toString());
@@ -116,7 +119,8 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
         customItem item = null;
         if (cursor.moveToFirst()) {
             do {
-            	item = new customItem(cursor.getString(0), cursor.getString(1));
+            	item = new customItem(cursor.getString(0), 
+        	    		cursor.getString(1), cursor.getString(2));
                 // Add book to books
             	items.add(item);
             } while (cursor.moveToNext());
@@ -137,6 +141,7 @@ public class ToDoSQLiteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("item", item.todoitem_txt.toString()); // get title 
         values.put("date", item.due_date.toString()); // get author
+        values.put(KEY_PRIORITY, item.priority.toString());
  
         // 3. updating row
         int i = db.update(TABLE_TODO_DB_LIST, //table

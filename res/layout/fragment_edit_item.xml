@@ -14,5 +14,15 @@
 		android:layout_width="match_parent"  android:layout_height="wrap_content" 
 		android:inputType="text"
 		android:imeOptions="actionDone" />
+
+	<Spinner
+	    android:id="@+id/spinner_frag"
+	    style="@style/BlackFont"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/lbl_edit_dt"
+	    android:layout_below="@+id/lbl_edit_dt"
+	    android:visibility="visible" />
+
 </LinearLayout>
 
