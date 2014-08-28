@@ -1,5 +1,12 @@
 ToDoApp
 =======
+4) Added the Ability to prioritize the tasks. Based on the priority the color of the font on the tasks would to Red: High, Yellow: Medium, Blue: Low.
+
+Hours Spent: 3 hours
+
+I have spent time on adding Adding entried to SQLite DB for saving the priority. Chaning the color of the font through the program dynamically and understanding of styles and setting background and foreground colors.
+
+----------------------------------------------------------------------------------------
 
 3)Used Dialog fragments to edit the todo items. Changed the background. Changed the styles. 
 
