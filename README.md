@@ -2,11 +2,11 @@ ToDoApp
 =======
 ==============================================================================================
 Extensions Added:
-  Add support for completion due dates for items
-  Add support for priority for items
-  Change the item in ListView to display additional attributes, stylize the items
-  Persist the todo app in SQLite instead of using a text file
-  Use a DialogFragment instead of new Activity to support editing items
+  1. Add support for completion due dates for items. 
+  2. Add support for priority for items. 
+  3. Change the item in ListView to display additional attributes, stylize the items. 
+  4. Persist the todo app in SQLite instead of using a text file.
+  5. Use a DialogFragment instead of new Activity to support editing items.
   
 Pending:
   Tweak the style of the app, improve UI, play with adding images or backgrounds
